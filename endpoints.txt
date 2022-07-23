@@ -1,0 +1,26 @@
+
+
+Errors:
+
+Customer rego number already registered
+
+
+{
+"name": "SubiPark"
+}
+
+{
+"carpark": 1
+}
+
+{
+"vehicle_registration": "1ghk236",
+"customer_name": "victor"
+}
+
+{
+"carpark": 1,
+"bay": 1,
+"customer": 1,
+"date": "2022-07-24"
+}
