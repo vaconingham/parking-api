@@ -61,15 +61,11 @@ Optional: bay:int
 Automated testing done using PyTest. You can find all the different tests inside the 'tests' directory.
 
 Validation tests include:
-- Number of bays automatically increments when a bay is added/deleted to/from a car park.
-- Bays are automatically allocated a bay number on create.
-- If bay number is provided on registation that is already created.
-- Customer vehicle registrations are unique
+- Customer vehicle registrations must be unique unique
 - Reservation cannot be made within 24 hours of booking.
 - Reservation cannot be made beyond 365 days of booking.
 - Reservation cannot be made on date where car park is full.
-- Reservation cannot be made if customer already exists on that date.
-- Reservation bay number is automatically allocated.
+- Reservation cannot be made if customer already exists on date.
 
 ## Bugs
 

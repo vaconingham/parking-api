@@ -54,17 +54,25 @@ class TestCreateReservation:
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
-# @pytest.mark.django_db
-# class TestRetrieveReservation:
-#     def test_if_reservation_list_exists_returns_200(self, api_client):
-#         reservation = baker.make(Reservation)
-#         response = api_client.get(f'/car-parks/cp/{reservation.car_park.pk}/reservations/')
-#         assert response.status_code == status.HTTP_200_OK
+@pytest.mark.django_db
+class TestRetrieveReservations:
+    def test_if_reservation_list_exists_returns_200(self, api_client):
+        date = datetime.date.today() + datetime.timedelta(days=1)
+        car_park = baker.make(CarPark)
+        customer = baker.make(Customer)
+        api_client.post(f'/car-parks/cp/{car_park.pk}/bays/add/', { 'car_park': car_park.pk })
+        api_client.post(f'/car-parks/cp/{car_park.pk}/reservations/add/', { 'car_park': car_park.pk, 'customer': customer.pk, 'date': date })
+        response = api_client.get(f'/car-parks/cp/{car_park.pk}/reservations/')
+        assert response.status_code == status.HTTP_200_OK
 
 
-# @pytest.mark.django_db
-# class TestDeleteReservation:
-#     def test_if_delete_reservation_returns_204(self, api_client):
-#         reservation = baker.make(Reservation)
-#         response = api_client.delete(f'/car-parks/cp/<int:pk>/reservations/')
-#         assert response.status_code == status.HTTP_204_NO_CONTENT
+@pytest.mark.django_db
+class TestDeleteReservation:
+    def test_if_reservation_list_exists_returns_204(self, api_client):
+        date = datetime.date.today() + datetime.timedelta(days=1)
+        car_park = baker.make(CarPark)
+        customer = baker.make(Customer)
+        api_client.post(f'/car-parks/cp/{car_park.pk}/bays/add/', { 'car_park': car_park.pk })
+        api_client.post(f'/car-parks/cp/{car_park.pk}/reservations/add/', { 'car_park': car_park.pk, 'customer': customer.pk, 'date': date })
+        response = api_client.delete(f'/car-parks/cp/{car_park.pk}/reservations/{date}/reservation/1/delete/')
+        assert response.status_code == status.HTTP_204_NO_CONTENT

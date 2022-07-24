@@ -17,9 +17,8 @@ class TestCreateCustomer:
         assert response.data['customer_name'] is not None
     
     def test_if_customer_already_exists_returns_400(self, api_client):
-        customer = baker.make(Customer)
-        api_client.post(f'/customers/add/', { 'vehicle_registration': f'{customer.vehicle_registration}', 'customer_name': f'{customer.customer_name}' })
-        response = api_client.post(f'/customers/add/', { 'vehicle_registration': f'{customer.vehicle_registration}', 'customer_name': f'{customer.customer_name}' })
+        api_client.post(f'/customers/add/', { 'vehicle_registration': 'a', 'customer_name': 'b' })
+        response = api_client.post(f'/customers/add/', { 'vehicle_registration': 'a', 'customer_name': 'c' })
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
