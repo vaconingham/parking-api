@@ -9,8 +9,9 @@ Created with the help of Django and the Django Rest Framework.
 1. Clone the project
 2. Crate a virtual environment: `python3 install venv path/to/your/virtual/env`
 3. Install dependencies: `pip install -r requirements.txt`
-4. Run the development server: `python3 manage.py runserver`
-5. To see all the API endpoints, open a browser and visit 127.0.0.1.
+4. `mkdir logs` in the project root directory (parking-api/logs).
+5. Run the development server: `python3 manage.py runserver`
+6. To see all the API endpoints, open a browser and visit 127.0.0.1.
 
 ### Create a car park
 Endpoint: `/car-parks/add`
@@ -56,16 +57,11 @@ Optional: bay:int
 - Allow bookings of time periods e.g. 12hours, 24hours, week, etc.
 - Change time of booking contraints e.g. bookings can be made further into the future or within less/more time.
 
-## Tests
+## Testing
 
 Automated testing done using PyTest. You can find all the different tests inside the 'tests' directory.
 
-Validation tests include:
-- Customer vehicle registrations must be unique unique
-- Reservation cannot be made within 24 hours of booking.
-- Reservation cannot be made beyond 365 days of booking.
-- Reservation cannot be made on date where car park is full.
-- Reservation cannot be made if customer already exists on date.
+To run tests, simply run the command `pytest` from the root folder. See PyTest for more information.
 
 ## Bugs
 

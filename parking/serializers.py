@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from .models import CarPark, Bay, Customer, Reservation
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class BayListField(serializers.RelatedField):

@@ -6,6 +6,8 @@ __pycache__
 db.sqlite3
 media
 migrations/
+Pipfile
+Pipfile.lock
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -3,6 +3,9 @@ from .serializers import CarParkSerializer, BaySerializer, CustomerSerializer, R
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 # Car Park:
@@ -17,7 +20,9 @@ def ListCarParksView(request):
         serializer = CarParkSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            logger.info("NEW_CAR_PARK_CREATED")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.info("FAILED_TO_CREATE_CAR_PARK")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -36,11 +41,14 @@ def CarParkView(request, pk):
         serializer = CarParkSerializer(car_park, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            logger.info("CAR_PARK_MODIFIED")
             return Response(serializer.data)
+        logger.info("FAILED_TO_MODIFY_CAR_PARK")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         car_park.delete()
+        logger.info("CAR_PARK_DELETED")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -56,7 +64,9 @@ def ListBaysView(request, pk):
         serializer = BaySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            logger.info("NEW_VEHICLE_BAY_CREATED")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.info("FAILED_TO_CREATE_NEW_VEHICLE_BAY")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -75,11 +85,14 @@ def BayView(request, pk, bay_number):
         serializer = BaySerializer(bay, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            logger.info("VEHICLE_BAY_MODIFIED")
             return Response(serializer.data)
+        logger.info("FAILED_TO_MODIFY_VEHICLE_BAY")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         bay.delete()
+        logger.info("VEHICLE_BAY_DELETED")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -109,7 +122,9 @@ def CustomersListView(request):
         serializer = CustomerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            logger.info("NEW_CUSTOMER_CREATED")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.info("FAILED_TO_CREATE_NEW_CUSTOMER")
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
@@ -128,11 +143,14 @@ def CustomerDetailView(request, vehicle_registration):
         serializer = CustomerSerializer(customer, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            logger.info("CUSTOMER_MODIFIED")
             return Response(serializer.data)
+        logger.info("FAILED_TO_MODIFY_CUSTOMER")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         customer.delete()
+        logger.info("CUSTOMER_DELETED")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -156,7 +174,9 @@ def ReservationsListView(request, pk):
         serializer = ReservationSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
+            logger.info("NEW_RESERVATION_CREATED")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.info("FAILED_TO_CREATE_NEW_CREATED")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -175,11 +195,14 @@ def ReservationView(request, pk, date, rpk):
         serializer = ReservationSerializer(reservation, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            logger.info("RESERVATION_MODIFIED")
             return Response(serializer.data)
+        logger.info("FAILED_TO_MODIFY_RESERVATION")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         reservation.delete()
+        logger.info("RESERVATION_DELETED")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

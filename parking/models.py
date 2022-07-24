@@ -5,9 +5,6 @@ from rest_framework import serializers
 
 logger = logging.getLogger(__name__)
 
-logging.basicConfig(filename='logs/models.log', level=logging.DEBUG,
-                    format='%(asctime)s:%(name)s:%(message)s')
-
 class CarPark(models.Model):
     name = models.CharField(max_length=50)
     abn = models.CharField(max_length=11, blank=True) # Validation required.
@@ -42,7 +39,7 @@ class CarPark(models.Model):
 
 def generate_bay_number(car_park):
     num = len(Bay.objects.filter(car_park=car_park)) + 1
-    logger.info(f"New bay number generated {num}")
+    logger.info("NEW_BAY_NUMBER_GENERATED")
     return num
 
 class Bay(models.Model):
@@ -140,10 +137,13 @@ class Reservation(models.Model):
                 if self.customer == r.customer:
                     customer_perm = False
         if customer_perm != True:
+            logger.info("CUSTOMER_ALREADY_BOOKED_DATE")
             raise serializers.ValidationError("Only one (1) booking allowed per vehicle per date.")
         if len(reservations) == len(Bay.objects.filter(car_park=self.car_park)):
+            logger.info("CAR_PARK_IS_FULL")
             raise serializers.ValidationError("This car park is full on the requested date.")
         if self.date < min_date or self.date > max_date:
+            logger.info("DATE_OUTSIDE_RANGE")
             raise serializers.ValidationError("A reservation cannot be within 24 hours or beyond 365 days of booking time.")
 
     def save(self, *args, **kwargs):
