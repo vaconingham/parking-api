@@ -55,7 +55,7 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 
 class ReservationSerializer(serializers.ModelSerializer):
-
+    # vehicle_registration = serializers.CharField(max_length=10, source="customer")
     class Meta:
         model = Reservation
         fields = [

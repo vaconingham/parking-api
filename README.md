@@ -36,13 +36,16 @@ Optional: bay:int
 * If a bay number is not provided at registration, the customer will be allocated a bay automatically.
 * A customer can only make one booking per day. This is based on the vehicle registration number.
 
-## To-Dos & Edge Cases
+## To-Dos, Features & Edge Cases
 
 ### Critical:
-- Entry validation on model fields
-- list of available dates within date range
+- Hyperlinked API related fields
+- Create viewsets
+- Register router endpoints
+- Get, update, or create customer when creating reservation
 
-### On-Demand:
+### Coming Soon:
+- list of available dates within date range
 - List partially reserved dates
 - Configure timezones
 - Configure better date and time formats
@@ -51,11 +54,22 @@ Optional: bay:int
 - Allow car park and/or bays to be unavailable/closed on specific days e.g. weekends
 - Allow booking of multiple days
 - Allow bookings of time periods e.g. 12hours, 24hours, week, etc.
-- Change time of boking contraints e.g. bookings can be made further into the future or within less/more time.
+- Change time of booking contraints e.g. bookings can be made further into the future or within less/more time.
 
 ## Tests
 
+Automated testing done using PyTest. You can find all the different tests inside the 'tests' directory.
 
+Validation tests include:
+- Number of bays automatically increments when a bay is added/deleted to/from a car park.
+- Bays are automatically allocated a bay number on create.
+- If bay number is provided on registation that is already created.
+- Customer vehicle registrations are unique
+- Reservation cannot be made within 24 hours of booking.
+- Reservation cannot be made beyond 365 days of booking.
+- Reservation cannot be made on date where car park is full.
+- Reservation cannot be made if customer already exists on that date.
+- Reservation bay number is automatically allocated.
 
 ## Bugs
 

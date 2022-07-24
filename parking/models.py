@@ -1,9 +1,12 @@
-from django.db import models
-from django.utils import timezone
 import datetime
-from rest_framework.validators import ValidationError
+import logging
+from django.db import models
 from rest_framework import serializers
-from django.core.exceptions import ValidationError
+
+logger = logging.getLogger(__name__)
+
+logging.basicConfig(filename='logs/models.log', level=logging.DEBUG,
+                    format='%(asctime)s:%(name)s:%(message)s')
 
 class CarPark(models.Model):
     name = models.CharField(max_length=50)
@@ -38,7 +41,9 @@ class CarPark(models.Model):
 
 
 def generate_bay_number(car_park):
-    return len(Bay.objects.filter(car_park=car_park)) + 1
+    num = len(Bay.objects.filter(car_park=car_park)) + 1
+    logger.info(f"New bay number generated {num}")
+    return num
 
 class Bay(models.Model):
 
