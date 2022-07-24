@@ -49,6 +49,7 @@ Optional: bay:int
 - Create viewsets
 - Register router endpoints
 - Get, update, or create customer when creating reservation
+- Better field validation
 
 ### Coming Soon:
 - list of available dates within date range
@@ -66,7 +67,7 @@ Optional: bay:int
 
 Automated testing done using PyTest. You can find all the different tests inside the 'tests' directory.
 
-To run tests, simply run the command `pytest` from the root folder. See PyTest for more information.
+To run tests, simply run `pytest` from the root folder (parking-api/). See PyTest for more information.
 
 ## Bugs
 
