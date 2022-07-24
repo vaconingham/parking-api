@@ -123,9 +123,12 @@ class Reservation(models.Model):
     
     def allocate_bay(self):
         reservations = Reservation.objects.filter(car_park=self.car_park, date=self.date)
-        if len(reservations) > 0:
+        if len(reservations) == len(Bay.objects.filter(car_park=self.car_park)):
+            raise serializers.ValidationError("This car park is full on the requested date.")
+        elif len(reservations) > 0 and len(reservations) <= len(Bay.objects.filter(car_park=self.car_park)):
             return Bay.objects.get(bay_number=len(reservations) + 1)
-        return Bay.objects.get(bay_number=1)
+        else:
+            return Bay.objects.get(bay_number=1)
 
     def clean(self):
         min_date = datetime.date.today() + datetime.timedelta(days=1)
