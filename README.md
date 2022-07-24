@@ -10,8 +10,13 @@ Created with the help of Django and the Django Rest Framework.
 2. Crate a virtual environment: `python3 install venv path/to/your/virtual/env`
 3. Install dependencies: `pip install -r requirements.txt`
 4. `mkdir logs` in the project root directory (parking-api/logs).
-5. Run the development server: `python3 manage.py runserver`
-6. To see all the API endpoints, open a browser and visit 127.0.0.1.
+5. Run `python3 manage.py makemigrations`, then `python3 manage.py migrate`
+6. (Optional) Create a superuser: `python3 manage.py createsuperuser`
+7. Run the development server: `python3 manage.py runserver`
+
+To test the project, simply run `pytest` from the root folder. To see the output, see logs/parking.log
+To manually test the app, you can either use the Django admin console, or use API endpoints. 
+Below are some basic examples:
 
 ### Create a car park
 Endpoint: `/car-parks/add`
