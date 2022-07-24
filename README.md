@@ -11,7 +11,7 @@ Created with the help of Django and the Django Rest Framework.
 3. Install dependencies: `pip install -r requirements.txt`
 4. `mkdir logs` in the project root directory (parking-api/logs).
 5. Run `python3 manage.py makemigrations`, then `python3 manage.py migrate`
-6. (Optional) Create a superuser: `python3 manage.py createsuperuser`
+6. Create a superuser: `python3 manage.py createsuperuser`
 7. Run the development server: `python3 manage.py runserver`
 
 To test the project, simply run `pytest` from the root folder. To see the output, see logs/parking.log
